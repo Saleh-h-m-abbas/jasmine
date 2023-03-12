@@ -12,12 +12,12 @@ const customers = [
 ];
 
 const columns = [
-    { field: "name", headerName: "Name", flex: 1 },
-    { field: "phone", headerName: "Phone Number", flex: 1 },
-    { field: "lastVisit", headerName: "Last Visit", flex: 1 },
-    { field: "address", headerName: "Address", flex: 1 },
-    { field: "city", headerName: "City", flex: 1 },
-    { field: "village", headerName: "Village", flex: 1 },
+    { field: "name", headerName: "اسم الزبون", flex: 1 },
+    { field: "phone", headerName: "رقم الهاتف", flex: 1 },
+    { field: "lastVisit", headerName: "اخر زياره", flex: 1 },
+    { field: "address", headerName: "العنوان", flex: 1 },
+    { field: "city", headerName: "اسم المدينه", flex: 1 },
+    { field: "village", headerName: "اسم القريه", flex: 1 },
     { field: "action", headerName: "Action", flex: 1, renderCell: () => <button>Add new</button> },
 ];
 
@@ -79,12 +79,12 @@ export const VisitDataTable = () => {
                 direction="row"
                 justifyContent="center"
                 alignItems="center"
-                sx={{ m: '20px' }}
+                sx={{ m: '20px',direction:'rtl' }}
             >
 
-                <InputLabel >City:</InputLabel>
+                <InputLabel >المدينه:</InputLabel>
                 <Select displayEmpty value={city} onChange={handleCityChange}
-                    renderValue={city !== "" ? undefined : () => "Select the City"}
+                    renderValue={city !== "" ? undefined : () => "اختار المدينه"}
                 >
                     <MenuItem value="none" disabled>
                         <em>Select the City</em>
@@ -95,8 +95,8 @@ export const VisitDataTable = () => {
                 </Select>
 
                 <InputLabel
-                    className="searchBar2" htmlFor="village-select">Village:</InputLabel>
-                <Select displayEmpty value={village} onChange={handleVillageChange} renderValue={village !== "" ? undefined : () => "Select the Village"}>
+                    className="searchBar2" htmlFor="village-select">القريه:</InputLabel>
+                <Select displayEmpty value={village} onChange={handleVillageChange} renderValue={village !== "" ? undefined : () => "اختار ال قريه"}>
                     <MenuItem value="" disabled>
                         <em>Select the Village</em>
                     </MenuItem>
@@ -106,23 +106,21 @@ export const VisitDataTable = () => {
                     {/* // Add more villages here  */}
                 </Select>
 
-                <TextField sx={{ m: '5px 25px' }} variant="filled" type="text" label="Search By Name" value={searchText} onChange={handleSearchTextChange} />
+                <TextField sx={{ m: '5px 25px' }} variant="filled" type="text" label="ابحث عبر الاسم" value={searchText} onChange={handleSearchTextChange} />
 
-                <Button variant="contained" color="success" onClick={filterCustomers}>Search</Button>
+                <Button variant="contained" color="success" onClick={filterCustomers}>ابحث</Button>
 
             </Grid>
+            <Grid sx={{ m: '20px',direction:'rtl' }}>
             <div style={{ height: tableHeight, width: "100%" }}>
-                <h2>Customers visited less than 2 weeks ago:</h2>
-                <DataGrid rows={lessThanTwoWeeks} columns={columns} autoHeight={true} />
+                <h2>زار الزبائن من أقل من أسبوعين :</h2>
+                <DataGrid rows={lessThanTwoWeeks} columns={columns}  />
+                <h2>زار الزبائن  من أقل من شهر:</h2>
+                <DataGrid rows={lessThanOneMonth} columns={columns} />
+                <h2>زار الزبائن من اكثر من شهر:</h2>
+                <DataGrid rows={otherCustomers} columns={columns} />
             </div>
-            <div style={{ height: tableHeight, width: "100%" }}>
-                <h2>Customers visited less than 1 month ago:</h2>
-                <DataGrid rows={lessThanOneMonth} columns={columns} autoHeight={true} />
-            </div>
-            <div style={{ height: tableHeight, width: "100%" }}>
-                <h2>Other customers:</h2>
-                <DataGrid rows={otherCustomers} columns={columns} autoHeight={true} />
-            </div>
+            </Grid>
         </>
     );
 };

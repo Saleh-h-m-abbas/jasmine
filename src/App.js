@@ -2,7 +2,7 @@ import Login from './components/login/Login'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Home } from './pages/home/Home';
 import Customers from './pages/customers/Customers';
-import Users from './pages/users/Users';
+// import Users from './pages/users/Users';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
             <Route path="/customers" element={<Customers />} />
           </Route>
           <Route>
-            <Route path="/users" element={<Users />} />
+            {/* <Route path="/users" element={<Users />} /> */}
           </Route>
         </Routes>
       </BrowserRouter>
